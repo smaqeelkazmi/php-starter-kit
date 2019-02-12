@@ -1,0 +1,16 @@
+{
+    "name": "aqeel/cashmail-new",
+    "description": "Manage Cashmail",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Syed Aqeel",
+            "email": "mohammad.aqeel@orangebuddies.pk"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {"App\\": "app/", "Model\\": "model/"}
+    }
+}
