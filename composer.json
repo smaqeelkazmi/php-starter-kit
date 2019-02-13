@@ -11,6 +11,11 @@
     "require": {
     },
     "autoload": {
-        "psr-4": {"App\\": "app/", "Model\\": "model/"}
+        "psr-4": {
+            "App\\": "app/",
+            "Model\\": "model/",
+            "Middleware\\": "middleware"
+        },
+        "files": ["utilities/helpers.php"]
     }
 }

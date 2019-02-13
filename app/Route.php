@@ -75,9 +75,55 @@ class Route
 
     protected function loadRouteFile($filename)
     {
+        $this->bootMiddleware();
+
         require $filename;
     }
 
 
+    protected function bootMiddleware()
+    {
+        require Boot::AppDir() . '/config/middleware.php';
+
+        if (isset($middleware) && !empty($middleware)) {
+
+            foreach ($middleware as $key => $item) {
+                if (!empty($key) && !empty($item)) {
+                    $this->applyMiddleware($key, $item);
+                }
+            }
+
+        }
+    }
+
+
+    protected function applyMiddleware($route, $middleware)
+    {
+        if (preg_match("/\*/", $route)) {
+            $routeMatch = str_replace('*', '', $route);
+
+            $isMiddleware = !empty($routeMatch) && !empty($this->path) ?
+                strpos(
+                    trim($this->path, '/'),
+                    trim($routeMatch, '/')
+                ) : null ;
+
+            if (
+                ( empty($routeMatch) && empty($isMiddleware) ) ||
+                ( $isMiddleware !== false && $isMiddleware === 0 )
+            ) {
+                $this->runMiddleware($middleware);
+            }
+        } elseif (trim($this->path, '/') === trim($route, '/')) {
+                $this->runMiddleware($middleware);
+        }
+    }
+
+
+    protected function runMiddleware($class)
+    {
+        $obj = new $class();
+        print_r($obj->boot());
+    }
 
 }

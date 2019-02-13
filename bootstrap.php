@@ -15,7 +15,7 @@ use App\Boot;
 /*
  * - Set Environment variables
  * */
-Boot::setEnvVars(getcwd() . '/env.php');
+Boot::setEnvVars(getcwd() . '/config/env.php');
 
 
 
