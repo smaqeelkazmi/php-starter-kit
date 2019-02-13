@@ -19,5 +19,8 @@ $vars = [
 
     'DEV_MOD'           => true,
 
+    'SITE_URL'          => 'http://localhost/new-admin',
+    'PUBLIC_PATH'       => 'public',
+
 
 ];
