@@ -26,6 +26,36 @@ class Model implements ModelInterface
     }
 
 
+
+    public function setAttributes($arr)
+    {
+        if (!empty($arr) && sizeof($arr) > 0) {
+            foreach ($arr as $item => $value) {
+                $this->$item = $value;
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+
+
+
+    public function setAttribute($name, $value) {
+        if (!empty($name)) {
+            $this->$name = $value;
+
+            return true;
+        }
+
+        return false;
+    }
+
+
+
+
     private function setPDO($pdo)
     {
         $this->pdo = $pdo;
