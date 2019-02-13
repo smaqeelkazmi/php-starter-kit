@@ -9,7 +9,8 @@
 
 $middleware = [
 
-    '*' => \Middleware\InitMiddleware::class
+    '*' => \Middleware\InitMiddleware::class,
+    'admin/*' => \Middleware\AuthMiddleware::class,
 
 ];
 

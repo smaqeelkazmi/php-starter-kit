@@ -123,7 +123,7 @@ class Route
     protected function runMiddleware($class)
     {
         $obj = new $class();
-        print_r($obj->boot());
+        $obj->boot($this);
     }
 
 }

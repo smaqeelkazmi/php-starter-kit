@@ -13,6 +13,7 @@ class InitMiddleware
 {
     public function boot()
     {
-        print_r('hello world'); exit;
+        // this middleware has been applied to all routes
+        // check in config/middleware.php
     }
 }
