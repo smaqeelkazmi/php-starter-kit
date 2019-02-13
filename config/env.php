@@ -12,7 +12,7 @@ $vars = [
     // Database Credentials
     'DB_USER'           => 'root',
     'DB_PASS'           => 'root',
-    'DB_NAME'           => 'admin_cbk',
+    'DB_NAME'           => 'dbname',
     'DB_HOST'           => 'localhost',
 
     'TABLE_PREFIX'      => '',
