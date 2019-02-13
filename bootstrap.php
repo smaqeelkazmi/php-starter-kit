@@ -12,6 +12,18 @@ use App\Boot;
 
 
 
+
+
+/*
+ * Init Session
+ * */
+Boot::initSession();
+
+
+
+
+
+
 /*
  * - Set Environment variables
  * */

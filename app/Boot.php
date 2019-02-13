@@ -60,4 +60,9 @@ class Boot
     }
 
 
+    public static function initSession()
+    {
+        session_start();
+    }
+
 }
