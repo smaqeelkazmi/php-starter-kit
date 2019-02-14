@@ -88,6 +88,21 @@ class Route
         if (isset($middleware) && !empty($middleware)) {
 
             foreach ($middleware as $key => $item) {
+                if (is_array($item)) {
+                    // in case of multiple middleware
+                    foreach ($item as $innerValue) {
+                        if (!empty($key) && !empty($innerValue)) {
+                            $this->applyMiddleware(
+                                $key,
+                                $innerValue
+                            );
+                        }
+                    }
+
+                    continue;
+                }
+
+
                 if (!empty($key) && !empty($item)) {
                     $this->applyMiddleware($key, $item);
                 }
