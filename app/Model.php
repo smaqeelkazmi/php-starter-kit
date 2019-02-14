@@ -13,6 +13,12 @@ class Model implements ModelInterface
     ;
 
 
+    protected $errorMessages = [
+        'no_model_name' => 'No Model Class Provided',
+        'unable_to_load' => 'Unable to load Model'
+    ];
+
+
     public $pdo;
 
 
@@ -42,7 +48,6 @@ class Model implements ModelInterface
 
 
 
-
     public function setAttribute($name, $value) {
         if (!empty($name)) {
             $this->$name = $value;
@@ -55,11 +60,44 @@ class Model implements ModelInterface
 
 
 
+    protected function loadModel($model, $arguments = null)
+    {
+        try {
+            if (empty($model))
+                throw new \Exception($this->errorMessages['no_model_name']);
+
+            $newModel = new $model($arguments);
+
+            if (!$newModel)
+                throw new \Exception($this->errorMessages['unable_to_load']);
+
+            $modelClassNamespace  = explode(
+                '\\',
+                get_class($newModel)
+            );
+
+            $modelClassName = sizeof($modelClassNamespace) > 0 ?
+                lcfirst(
+                    $modelClassNamespace[count($modelClassNamespace) - 1]
+                ) :
+                $modelClassNamespace
+            ;
+
+            $this->$modelClassName = $newModel;
+
+        } catch (\Exception $exception) {
+            die($exception->getMessage());
+        }
+
+    }
+
+
 
     private function setPDO($pdo)
     {
         $this->pdo = $pdo;
     }
+
 
 
     private function setTableName()
