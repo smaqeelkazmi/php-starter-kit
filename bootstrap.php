@@ -38,15 +38,21 @@ Boot::setEnvVars(getcwd() . '/config/env.php');
 /*
  * - Setup Database Connection
  * */
-$pdo = new \PDO(
-    "mysql:host=localhost;dbname=".getenv('DB_NAME').";charset=utf8mb4",
-    getenv('DB_USER'),
-    getenv('DB_PASS')
-);
+try {
+    $pdo = new \PDO(
+        "mysql:host=localhost;dbname=".getenv('DB_NAME').";charset=utf8mb4",
+        getenv('DB_USER'),
+        getenv('DB_PASS')
+    );
 
-if (getenv('DEV_MOD')) {
-    $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+    if (getenv('DEV_MOD')) {
+        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+    }
+} catch (Exception $exception) {
+    if (getenv('DEV_MOD')) {
+        die($exception->getMessage());
+    }
 }
 
 
@@ -71,7 +77,7 @@ $view = new View();
  * */
 Boot::setGlobals([
     'view' => $view,
-    'pdo' => $pdo
+    'pdo' => isset($pdo) ? $pdo : null
 ]);
 
 

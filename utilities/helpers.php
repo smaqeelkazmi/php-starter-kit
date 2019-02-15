@@ -26,14 +26,13 @@ function view_var($varname, $default = null)
 function redirect_to($url)
 {
     if (!$url) {
-        throw new Exception('No URL provided for redirection');
+        exit('No URL provided for redirection');
     }
 
-    die(
     header('location:'.
         getenv('SITE_URL') . '/' .
-        getenv('PUBLIC_PATH') . '/' .
         trim($url, '/')
-    )
     );
+
+    exit();
 }

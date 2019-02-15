@@ -63,6 +63,7 @@ class Route
             $this->loadRouteFile($inCase3);
 
         } elseif (file_exists($ofError404)) {
+            http_response_code(404);
             $this->loadRouteFile($ofError404);
 
         } else {

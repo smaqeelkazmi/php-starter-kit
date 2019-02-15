@@ -17,9 +17,9 @@ $vars = [
 
     'TABLE_PREFIX'      => '',
 
-    'DEV_MOD'           => true,
+    'DEV_MOD'           => false,
 
-    'SITE_URL'          => 'http://localhost/new-admin',
+    'SITE_URL'          => 'http://localhost/',
     'PUBLIC_PATH'       => 'public',
 
 
